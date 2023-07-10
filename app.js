@@ -1,12 +1,19 @@
 const express = require('express');
+const mongoose=require('mongoose');
+require('dotenv').config();
+
+const userRoutes=require('./routes/user');
 
 const app= express();
 
-require('dotenv').config()
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser:true,
+    family: 4
+}).then(() => console.log('DB Connected'));
 
-app.get('/', (req,res) => {
-    res.send("Hello from node ");
-});
+
+//middleware
+app.use('/api',userRoutes);
 
 const port = process.env.PORT || 8000
 
