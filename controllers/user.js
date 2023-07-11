@@ -1,17 +1,13 @@
 const User = require('../models/user');
 
-exports.signup= (req,res) => {
-
+exports.signup = (req, res) => {
     console.log("req.body", req.body);
     const user = new User(req.body);
-    user.save((err, user) => {
-        if(err){
-            return res.status(400).json({err});
-        }
-
-        res.json({user});
-
-    });
-
-   
+    user.save()
+        .then(savedUser => {
+            res.json({ user: savedUser });
+        })
+        .catch(err => {
+            res.status(400).json({ error: err });
+        });
 };
