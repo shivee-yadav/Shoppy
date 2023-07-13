@@ -4,7 +4,7 @@ const crypto = require('crypto');//hash the password
 const { v1: uuidv1 } = require('uuid');
 //unique id
 
-const userSchema = new mongoose.mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,//trims whitespaces from before and after
