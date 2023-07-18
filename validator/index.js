@@ -1,17 +1,16 @@
-const { check, validationErrors } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
-exports.userSignupValidator =(res,req,next) => { 
-  check("name", "Name is required").notEmpty();
-  check("email")
-    .isEmail().withMessage("Invalid email")
-    .isLength({ min: 3, max: 32 }).withMessage("Email must be between 3 and 32 characters");
-  check("password", "Password is required").notEmpty();
-  check("password")
-    .isLength({ min: 6 }).withMessage("Password must contain at least 6 characters")
+exports.userSignupValidator = (req,res,next) => { 
+
+  body("name", "Enter a valid Name").isLength({ min: 3});
+  body("email","Enter a valid Email").isEmail();
+  body("password", "Password is required").isLength({ min: 6 }).withMessage("Password must contain at least 6 characters")
     .matches(/\d/).withMessage("Password must contain a number");
 
   
+  
+  };
 
 
 
-};
+
